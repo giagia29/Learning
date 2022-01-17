@@ -1,0 +1,24 @@
+What is CSS?
+- stands for Cascading Stylesheets
+- NOT a programming language
+- Stylesheet/Styling language
+- Used for website layout and design
+3 methods for adding CSS
+- Inline CSS: Directly in the html element (NO! Do not recommend to use)
+
+- Internal CSS: Using <style> tags within a single document
+
+- External CSS: Linking an external .css file
+To use external CSS:
+- Create a new file, save as .CSS type
+- In the main .HTML file, under tag <title>, type in "link" and press Tab => it will show up <link rel="stylesheet" type="text/css" href="">
+=> type in the .CSS file name in href then click save.
+
+Margin & Padding Shorthand
+p{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 10px;
+}
+
+In order to use "position: absolute" => has to set up "position: relative" first (within that area working on).

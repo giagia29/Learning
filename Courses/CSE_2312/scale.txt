@@ -1,0 +1,19 @@
+.global scaleU32
+
+.text
+
+//scaleU32(uint32_t y[], const uint32_t x[], uint32_t scale, uint32_t count)
+// address of y[0] is in R0, address of x[0] is in R1, scale is in R2, count in R3
+
+scaleU32:
+	PUSH {R4, R5} // push R5, then R4 onto stack
+scaleU32_loop:
+	CMP R3, #0 // is count = 0?
+	BEQ scaleU32_end // yes -> exit
+	LDR R4, [R1], #4 // R4 = *R1, R1 = R1 + 1
+	MUL R5, R4, R2
+
+	B scaleU32_loop:
+scaleU32_end:
+	POP {R4}
+	BX LR	

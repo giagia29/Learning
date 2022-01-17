@@ -1,0 +1,17 @@
+Default Memberwise Assignment
+
+The assignment operator (=) can be used to assign an object to another object of the same class.
+
+Example:
+
+//create a class named Time
+Time MyTime;
+Time YourTime;
+
+MyTime.setTime(13, 27, 6);   //change time
+
+YourTime = MyTime;           // Set YourTime equal to MyTime
+
+Objects may be passede as function arguments and may be returned from functions
+
+The default is to pass by the value

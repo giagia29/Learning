@@ -1,0 +1,5 @@
+What is CSS?
+- stands for Cascading Stylesheets
+- NOT a programming language
+- Stylesheet/Styling language
+- Used for website layout and design

@@ -1,0 +1,66 @@
+998 Type:           SystemStar estimate
+0   Written:        12/06/21 17:06:54
+900 File Version:   9003
+901 SW Version:     Demo
+902 Build:          3.0.3.1003
+904 Sequence Number:00204125760506842532224011146
+905 Version:        SystemStar 3.0 Demo
+906 Serial Number:  83 - 01126                              
+estcreate "FoodSystem"
+dbselect "COCOMO_II.2000_Waterfall"
+calcmodel intermediate
+prec 3
+flex 3
+resl 2
+team 3
+pmat 3
+wsname *
+amcf *
+wsstartpoint 2
+rename "Component1"
+ACAP  nominal
+AEXP  very lo
+PCAP      low
+RUSE      low
+CD00  very lo
+CD01  nominal
+wsslocdist y  0 1        2000
+increment 1
+set auto on
+910 Lines:                       35
+911 Characters:                 587
+912 File Size:                  867
+913 Checksum 1:                  17
+914 Checksum 2:                 141
+915 Checksum 3: 0462233817061614512
+1000 "FoodSystem"
+1001 "    "
+1002 152
+1003  100
+1004   1.0000
+1006      10.0917
+1007      10.0917
+1008   1.5861
+1009       7.7037
+1010       7.7037
+1011         2000
+1012         2000
+1013    1.1138
+1014    0.3208
+1015 2
+1016 3
+1017 3
+1018 2
+1019 3
+1020 3
+1021    0
+1022    2.9400
+1023   0.91000
+1024   1.00000
+1025    3.6700
+1026   0.28000
+1027   0.20000
+1028   0.20380
+1029   0.00000
+1030 s
+1031 ""

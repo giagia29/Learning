@@ -1,0 +1,81 @@
+//sum element of array in C code. 
+
+extern double sumF64(const double x[], uint32_t count);
+
+#define COUNT 3
+int main(void)
+{
+	double x[COUNT] = {1.1, 2.2, 3.3};
+	double sum = sumF64(x, COUNT);
+	printf("Sum of elements in x is %l f\n", sum);
+
+	return 0; 
+}
+
+//assembly code sumF64
+
+.global sumF64
+.text
+
+// double sumF64(const double x[], uint32_t count)
+// address of x[0] is stored in R0, value of count is stored in R1
+// => the sum is returned in register D0
+
+sumF64:
+	MOV R2, #0		// R2 = 0
+	VMOV D0, R2, R2 	// zero our sum in D0 (D0 <= R2:R2)
+
+sumF64_loop:
+	CMP R1, #0		// is count = 0?
+	BEQ sumF64_end  	// if yes, then return value
+	VLDR D1, [R0]   	// no, load D1 with next value in array
+	ADD R0, R0, #8  	// increment R0 by sizeof(double) = 8
+	VADD.F64 D0, D0, D1	// D0 = D0 + D1 (.F64 means D0 and D1 contain a double 				// not a uint64_t or anything)
+	SUB R1, R1, #1		// decrement the count
+	B sumF64_loop		// loop back to get the next value
+
+sumF64_end:
+	BX LR
+
+
+
+
+
+
+// the mean value of elements in the array in C code.
+
+extern double meanF64(const double x[], uint32_t count);
+
+#define COUNT 3
+int main(void)
+{
+	double x[COUNT] = {1.1, 2.2, 3.3};
+	double mean = meanF64(x, COUNT);
+	printf("Mean of elements in x is %l f\n", mean);
+
+	return 0; 
+}
+
+//assembly code
+// double meanF64(const double x[], uint32_t count)
+
+.global meanF64
+.text
+
+meanF64:
+	MOV R2, #0		// R2 = 0
+	VMOV D0, R2, R2 	// zero our sum in D0 (D0 <= R2:R2)
+	VMOV S4, R1		// S4 equals to the count in R1
+meanF64_loop:
+	CMP R1, #0		// is count = 0?
+	BEQ sumF64_end  	// if yes, then return value
+	VLDR D1, [R0]   	// no, load D1 with next value in array
+	ADD R0, R0, #8  	// increment R0 by sizeof(double) = 8
+	VADD.F64 D0, D0, D1	// D0 = D0 + D1 (.F64 means D0 and D1 contain a double 				// not a uint64_t or anything)
+	SUB R1, R1, #1		// decrement the count
+	B sumF64_loop		// loop back to get the next value
+
+meanF64_end:
+	VCVT.F64.U32 D1, S4	// D1 = S4 = count (D1 is a double, S4 was a uint32_t)
+	VDIV.F64 D0, D0, D1	// D0  = sum / count; 
+	BX LR

@@ -1,0 +1,73 @@
+sqlite3 "name_the_database" => sqlite3 HR004
+
+'.tables' (management system command with have a dot at the beginning)
+=> If the DB has tables, '.tables' will listed all the tables in the DB
+
+'.exit' (exit the DBMS)
+
+'.schema': command to show all the SQL code
+
+FOREIGN KEY (have to be connected to something else between two tables)
+
+=> Example: 
+
+CREATE TABLE DEPT_LOCATIONS
+	(Dnumber		INT					NOT NULL,
+	 Dlocation 		VARCHAR(15)			NOT NULL,
+	 PRIMARY KEY (Dnumber, Dlocation),
+	 FOREIGN KEY (Dnumber) REFERENCES DEPARTMENT (Dnumber) );
+
+.read HRTables.sql
+
+INSERT INTO 'table_name'('attribute1', 'attribute2') VALUES ('value1', 'value2');
+
+=> INSERT INTO regions(region_id, region_name) VALUES (1, 'Europe');
+
+.header on => gives the name of the attribute (name of column)
+.mode column
+
+SELECT	Bdate, Address
+FROM	EMPLOYEE
+WHERE	Fname = 'John' AND Minit = 'B AND Lname = 'Smith' 
+
+SELECT	Fname, Lname, Address
+FROM	EMPLOYEE, DEPARTMENT => cross product
+WHERE	Dname = 'Research' AND Dnumber = Dno;
+
+
+SELECT	first_name, last_name, job_title
+FROM	JOBS AS J, EMPLOYEES AS E
+WHERE	J.job_id = E.job_id;
+
+SELECT	first_name, last_name, job_title, department_name
+FROM	JOBS AS J, EMPLOYEES AS E, DEPARTMENTS AS D
+WHERE	J.job_id = E.job_id AND E.department_id = D.department_id
+
+
+SELECT		last_name, first_name, job_title, department_name
+FROM		JOBS AS J, EMPLOYEES AS E, DEPARTMENTS AS D
+WHERE		J.job_id = E.job_id AND E.department_id = D.department_id
+ORDER BY	last_name ASC;
+
+.import jobs.csv JOBS => import values from the 'jobs.csv' file into the table 'JOBS'
+
+
+SELECT	Fname, Lname, Address
+FROM	EMPLOYEE JOIN DEPARTMENT ON Dno = Dnumber
+WHERE	Dname = 'Research';
+
+SELECT 	Pname
+FROM	PROJECT JOIN WORKS_ON ON Pno = Pnumber
+WHERE	ESSN = '123456789'
+
+CREATE TRIGGER VALIDATE_EMAIL
+
+BEFORE INSERT OR UPDATE ON LEADS
+
+	BEGIN
+		SELECT 
+		CASE WHEN NEW.email not like '%_@mavs.uta.edu'
+		THEN RAISE(ABORT, 'INVALID EMAIL ADDRESS')
+		END;
+	END;
+

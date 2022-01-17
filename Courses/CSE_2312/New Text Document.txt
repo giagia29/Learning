@@ -1,0 +1,12 @@
+.global unint32ToBinary
+
+.text
+
+// void uint32ToBinary(char str[], uint32_t x)
+// address of str[0] is passed in R0, value x is passed in R1
+
+uint32ToBinary:
+	MOV R2, #0x80000000 // mask with bit 31 set
+utb_loop:
+	
+	BX LR

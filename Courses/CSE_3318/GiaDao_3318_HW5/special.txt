@@ -1,0 +1,5 @@
+/* Special case: No courses have the prequisite, so student can take any course randomly that does not necessarily follow the order */
+c400
+c500
+c100
+c200

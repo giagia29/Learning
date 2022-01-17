@@ -1,0 +1,11 @@
+#define MAX_NAME_LENGTH 32
+
+#ifdef PACK
+#pragma pack(push)
+#pragma pack(1)
+#endif
+
+typedef struct _BUSINESS
+{
+	uint32_t taxId;
+}

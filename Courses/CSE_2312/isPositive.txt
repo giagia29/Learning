@@ -1,0 +1,25 @@
+.global isPositiveU32
+.global isPositiveS32
+
+.text
+
+//bool isPositiveU32(uint32_t x)
+// R0 = x, return 1 in R0 if x is positive, 0 in R0 if x is not.
+
+isPositiveU32:
+	CMP R0, #0 //set the flag: Z = 1 if it (R0 - 0) equals zero, z = 0 if it's positive
+	MOVNE R0, #1 //if it's not equal, return 1 (positive case).
+	MOVEQ R0, #0 // return 1 means R0 - 0 equals 0.
+	BX LR
+	
+//bool isPositiveS32(int32_t x)
+// R0 = x, return 1 in R0 if x is positive, 0 in R0 if x is not.
+
+isPositiveU32:
+	CMP R0, #0 //set the flag: Z = 1 if it (R0 - 0) equals zero, Z = 0 if it's not zero; and if S = 1 then (R0 - 0) is negative, S = 0 then it's not negative
+	MOVNE R0, #1 //if it's not equal, return 1 (positive case).
+	MOVEQ R0, #0 // return 1 means (R0 - 0) equals 0.
+	MOVMI R0, #0 // if (R0 - 0) is negative. 
+	BX LR
+
+

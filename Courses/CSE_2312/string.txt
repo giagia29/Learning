@@ -1,0 +1,38 @@
+.global strLength
+.global strFind
+.global strFindN
+
+.text
+
+// uint32_t strLength(const char str[])
+// address of str[0] in R0, return length in R0
+
+strLength:
+	MOV R1, R0           // R1 = &str[0]
+	MOV R0, #0           // R0 = i = 0 (start index)
+strLength_loop:
+	LDRSB R2, [R1, R0]   // R2 will hold the value at the address [R1+R0]
+	CMP R2, #0           // Is R2 a null character?
+	BEQ strLength_end    // If it has reached the null character then 							return the result.
+	ADD R0, R0, #1
+	B strLength_loop     // Look at the next character  
+strLength_end:
+	BX LR     
+
+// int32_t strFind(const char str[], char c)
+// address of str[0] in R0, character to find in R1
+// return index in str of first instance of c, -1 if not found in R)
+
+strFind:
+	MOV R2, R0            // R2 holds the address of str[0], or R2 = &str[0]
+	MOV R0, #0            // Assign R0 = 0, start at index 0 (R0 = i = 0)
+strFind_loop:
+	LDRSB R3, [R2, R0]    // R3 = str[i]
+	CMP R3, R1            // Is "str[i] == c"
+	BEQ strFind_end       // If the character is found then (return result + terminate                                      function)
+	ADD R0, R0, #1
+	CMP R3, #0
+	BNE strFind_loop
+	MOV R0, #-1
+strFind_end:
+	BX LR
